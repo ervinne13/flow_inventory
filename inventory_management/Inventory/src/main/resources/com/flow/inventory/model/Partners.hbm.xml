@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 10, 2016 2:38:08 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="inventory_management" name="com.flow.inventory.model.Partner" optimistic-lock="version" table="partners">
+    <id name="id" type="java.lang.Integer">
+      <column name="id"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="com.flow.inventory.model.PartnerType" fetch="select" name="partnerType">
+      <column name="partner_type_id" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="com.flow.inventory.model.Partner" fetch="select" name="partners">
+      <column name="company_id"/>
+    </many-to-one>
+    <property name="name" type="string">
+      <column length="64" name="name" not-null="true"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="partnerAccountings" table="partner_accounting">
+      <key>
+        <column name="partner_id" not-null="true"/>
+      </key>
+      <one-to-many class="com.flow.inventory.model.PartnerAccounting"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="itemses" table="items">
+      <key>
+        <column name="vendor_id"/>
+      </key>
+      <one-to-many class="com.flow.inventory.model.Item"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="partnerses" table="partners">
+      <key>
+        <column name="company_id"/>
+      </key>
+      <one-to-many class="com.flow.inventory.model.Partner"/>
+    </set>
+    <set fetch="select" inverse="false" lazy="true" name="addresseses" table="partners_has_addresses">
+      <key>
+        <column name="partners_id" not-null="true"/>
+      </key>
+      <many-to-many entity-name="com.flow.inventory.model.Address">
+        <column name="addresses_id" not-null="true"/>
+      </many-to-many>
+    </set>
+  </class>
+</hibernate-mapping>

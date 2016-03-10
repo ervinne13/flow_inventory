@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 10, 2016 2:38:08 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="inventory_management" name="com.flow.inventory.model.PartnerAccounting" optimistic-lock="version" table="partner_accounting">
+    <id name="id" type="int">
+      <column name="id"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="com.flow.inventory.model.ChartOfAccounts" fetch="select" name="chartOfAccountsByAccountPayable">
+      <column length="24" name="account_payable"/>
+    </many-to-one>
+    <many-to-one class="com.flow.inventory.model.ChartOfAccounts" fetch="select" name="chartOfAccountsByAccountReceivable">
+      <column length="24" name="account_receivable"/>
+    </many-to-one>
+    <many-to-one class="com.flow.inventory.model.Partner" fetch="select" name="partners">
+      <column name="partner_id" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="com.flow.inventory.model.PaymentTerm" fetch="select" name="paymentTermsByCustomerPaymentTermId">
+      <column name="customer_payment_term_id"/>
+    </many-to-one>
+    <many-to-one class="com.flow.inventory.model.PaymentTerm" fetch="select" name="paymentTermsByVendorPaymentTermId">
+      <column name="vendor_payment_term_id"/>
+    </many-to-one>
+    <property name="isVendor" type="boolean">
+      <column name="is_vendor" not-null="true"/>
+    </property>
+    <property name="isCustomer" type="boolean">
+      <column name="is_customer" not-null="true"/>
+    </property>
+  </class>
+</hibernate-mapping>

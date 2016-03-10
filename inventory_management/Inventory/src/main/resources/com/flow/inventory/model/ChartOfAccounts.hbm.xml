@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 10, 2016 2:38:08 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.flow.inventory.model.ChartOfAccounts" table="chart_of_accounts" catalog="inventory_management" optimistic-lock="version">
+        <id name="code" type="string">
+            <column name="code" length="24" />
+            <generator class="assigned" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" length="64" not-null="true" />
+        </property>
+        <set name="partnerAccountingsForAccountPayable" table="partner_accounting" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="account_payable" length="24" />
+            </key>
+            <one-to-many class="com.flow.inventory.model.PartnerAccounting" />
+        </set>
+        <set name="partnerAccountingsForAccountReceivable" table="partner_accounting" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="account_receivable" length="24" />
+            </key>
+            <one-to-many class="com.flow.inventory.model.PartnerAccounting" />
+        </set>
+    </class>
+</hibernate-mapping>
