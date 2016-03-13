@@ -1,12 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<style>
-    .error {
-        color: red;
-    }
-</style>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -27,10 +21,10 @@
             <div class="login-box-body">                
                 <c:choose>
                     <c:when test="${loginBean.getValidity() == 'INCORRECT_PASSWORD'}">
-                        <p class="login-box-msg error">Incorrect Password</p>
+                        <p class="login-box-msg text-red">Incorrect Password</p>
                     </c:when>
                     <c:when test="${loginBean.getValidity() == 'UNREGISTERED'}">
-                        <p class="login-box-msg error">Unregistered Email</p>
+                        <p class="login-box-msg text-red">Unregistered Email</p>
                     </c:when>
                     <c:otherwise>
                         <p class="login-box-msg">Sign in to start your session</p>

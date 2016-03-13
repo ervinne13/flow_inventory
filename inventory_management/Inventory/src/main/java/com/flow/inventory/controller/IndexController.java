@@ -5,10 +5,14 @@
  */
 package com.flow.inventory.controller;
 
-import com.flow.inventory.dao.UserDao;
 import com.flow.inventory.model.User;
+import com.flow.inventory.service.UserService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,33 +26,27 @@ import org.springframework.web.servlet.ModelAndView;
 public class IndexController {
 
     @Autowired
-    private UserDao userDao;
+    private UserService userService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView index() {
-        return new ModelAndView("index");
+    public ModelAndView index() {        
+
+        ModelAndView mv = new ModelAndView("index");
+
+        User authenticatedUser = userService.getCurrentlyAuthenticatedUser();
+        if (authenticatedUser == null) {
+            throw new RuntimeException("Authenticated user null on access: please check your security configuration or the userService implementation.");
+        }
+
+        mv.addObject("authenticatedUser", authenticatedUser);
+
+        return mv;
     }
 
-    @RequestMapping(value = "/loging", method = RequestMethod.GET)
-    public ModelAndView loging() {
-        return new ModelAndView("auth/login");
-    }
-
-    @RequestMapping(value = "/admin", method = RequestMethod.GET)
-    public ModelAndView admin() {
-        return new ModelAndView("index");
-    }
-
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public ModelAndView test() {
-        userDao.getUserByEmail("ervinnesodusta13@yahoo.com.ph");
-        return new ModelAndView("index");
-    }
-
-    @RequestMapping(value = "/test2", method = RequestMethod.GET)
-    public ModelAndView test2() {
-        List<User> users = userDao.listUsers();
-        return new ModelAndView("index");
+    @RequestMapping(value = "/denied")
+    public ResponseEntity<?> denied() {
+        System.out.println("403");
+        return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
 
 }

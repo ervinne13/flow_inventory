@@ -1,5 +1,11 @@
+<%-- 
+    Document   : denied
+    Created on : Mar 8, 2016, 8:47:11 AM
+    Author     : Ervinne Sodusta
+--%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags/" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -17,15 +23,15 @@
     }
 </style>
 
-<t:adminlte>
+<t:adminlte skin="skin-purple">
     <jsp:attribute name="pageTitle">
         Inventory | Admin
     </jsp:attribute>
-    <jsp:attribute name="bodyImports">        
+    <jsp:attribute name="bodyImports">
         <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-        <script src="Inventory/resources/lib/AdminLTE/js/pages/dashboard2.js"></script>
+        <script src="<c:url value="/resources/lib/AdminLTE/js/pages/dashboard2.js" />"></script>
         <!-- AdminLTE for demo purposes -->
-        <script src="Inventory/resources/lib/AdminLTE/js/demo.js"></script>
+        <script src="<c:url value="/resources/lib/AdminLTE/js/demo.js"/>"></script>
     </jsp:attribute>
     <jsp:body>
         <div class="content-wrapper">
@@ -280,6 +286,6 @@
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </section><!-- /.content -->
-        </div>
-    </jsp:body>   
+        </div>        
+    </jsp:body>
 </t:adminlte>

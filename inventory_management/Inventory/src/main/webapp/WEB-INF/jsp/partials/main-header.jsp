@@ -65,16 +65,16 @@
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="<c:url value="/resources/img/ghe.jpg"/>" class="user-image" alt="User Image">
-                        <span class="hidden-xs">Geraldine Aligno</span>
+                        <img src="<c:url value="${authenticatedUser.getImageUrl()}"/>" class="user-image" alt="User Image">
+                        <span class="hidden-xs">${authenticatedUser.getDisplayName()}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="<c:url value="/resources/img/ghe.jpg"/>" class="img-circle" alt="User Image">
+                            <img src="<c:url value="${authenticatedUser.getImageUrl()}"/>" class="img-circle" alt="User Image">
                             <p>
-                                Geraldine Aligno
-                                <small>Chief Operating Officer / Sales & Marketing Head</small>
+                                ${authenticatedUser.getDisplayName()}
+                                <small>${authenticatedUser.getDescription()}</small>
                             </p>
                         </li>
                         <!-- Menu Footer-->
@@ -83,7 +83,7 @@
                                 <a href="#" class="btn btn-default btn-flat">Profile</a>
                             </div>
                             <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                <a href="<c:url value="/j_spring_security_logout"/>" class="btn btn-default btn-flat">Sign out</a>
                             </div>
                         </li>
                     </ul>

@@ -9,11 +9,12 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">            
             <div class="pull-left image">
-                <img src="<c:url value="/resources/img/ghe.jpg"/>" class="img-circle" alt="User Image">
+                <img src="<c:url value="${authenticatedUser.getImageUrl()}"/>" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-                <p>Geraldine Aligno</p>
-                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                <p>${authenticatedUser.getDisplayName()}</p>
+                <small>${authenticatedUser.getDescription()}</small>
+                <!--<a href="#"><i class="fa fa-circle text-success"></i> Online</a>-->
             </div>
         </div>   
         <!-- sidebar menu: : style can be found in sidebar.less -->

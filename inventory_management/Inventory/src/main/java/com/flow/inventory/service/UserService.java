@@ -6,6 +6,8 @@
 package com.flow.inventory.service;
 
 import com.flow.inventory.beans.LoginBean.Validity;
+import com.flow.inventory.dao.UserDao;
+import com.flow.inventory.model.User;
 
 /**
  *
@@ -13,6 +15,10 @@ import com.flow.inventory.beans.LoginBean.Validity;
  */
 public interface UserService {
 
-    public Validity getValidity(String email, String password);
+    public User getCurrentlyAuthenticatedUser();
+    
+    public Validity authenticate(String email, String password);
+
+    public void registerUser(User user) throws UserDao.UserDaoException;
 
 }

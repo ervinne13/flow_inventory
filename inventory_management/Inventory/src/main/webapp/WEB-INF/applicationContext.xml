@@ -5,9 +5,11 @@
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
-       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
     <!--<tx:annotation-driven transaction-manager="hibernateTransactionManager" />-->
     
@@ -24,22 +26,44 @@
 
     <!-- ADD PERSISTENCE SUPPORT HERE (jpa, hibernate, etc) -->
         
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/inventory_management"/>
+        <property name="username" value="root"/>        
+    </bean>
+        
+    <context:component-scan base-package="com.flow.inventory.model"/>
+    <context:component-scan base-package="com.flow.inventory.dao"/>
+    <context:component-scan base-package="com.flow.inventory.service"/>
+        
     <bean id="sessionFactory"
           class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-        <property name="configLocation" value="classpath:hibernate.cfg.xml" />        
+        <property name="dataSource" ref="dataSource" />        
+        <!--<property name="configLocation" value="classpath:hibernate.cfg.xml" />-->
         <property name="annotatedClasses">
             <list>
                 <value>com.flow.inventory.model.User</value>
+                <value>com.flow.inventory.model.UserRole</value>                
                 <value>com.flow.inventory.beans.LoginBean</value>
             </list>
         </property>
+        <property name="packagesToScan" value="com.flow.inventory.model" />
+        <property name="hibernateProperties">
+            <props>
+                <!--                <prop key="hibernate.current_session_context_class">thread</prop>
+                <prop key="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</prop>                -->
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.use_sql_comments">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+            </props>
+        </property>     
+    </bean>       
+    
+    <tx:annotation-driven/> 
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
     </bean>
  
-    <!--Use Autowire instead-->
-    <!--    <bean id="userDao" class="com.flow.inventory.dao.UserDaoImpl">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>-->
-     
-    <!--<tx:annotation-driven transaction-manager="transactionManager"/>-->
- 
+    <tx:annotation-driven transaction-manager="transactionManager"/>
 </beans>

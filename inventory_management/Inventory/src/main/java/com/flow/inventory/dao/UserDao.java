@@ -22,4 +22,12 @@ public interface UserDao {
 
     User getUserByEmail(String email);
 
+    public static class UserDaoException extends Exception {
+
+        public UserDaoException(String message) {
+            super(message);
+        }
+
+    }
+
 }

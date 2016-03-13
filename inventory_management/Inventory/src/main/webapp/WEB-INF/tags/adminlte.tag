@@ -1,6 +1,7 @@
 <%@tag description="Admin LTE Page Template Tag" pageEncoding="UTF-8"%>
 <%@attribute name="bodyImports" fragment="true" %>
 <%@attribute name="pageTitle" required="true" fragment="true" %>
+<%@attribute name="skin" required="true" fragment="true" %>
 
 <html>
     <head>
@@ -11,7 +12,7 @@
         </title>
         <jsp:include page="../jsp/partials/head-imports.jsp"/>
     </head>
-    <body class="hold-transition skin-blue sidebar-mini">
+    <body class="hold-transition <jsp:invoke fragment="skin"/> sidebar-mini">
         <div class="wrapper">
             <!--Header-->
             <jsp:include page="../jsp/partials/main-header.jsp"/>
@@ -28,7 +29,7 @@
         </div><!-- ./wrapper -->
 
         <jsp:include page="../jsp/partials/body-imports.jsp"/>
-        
+
         <jsp:invoke fragment="bodyImports"/>
     </body>
 </html>

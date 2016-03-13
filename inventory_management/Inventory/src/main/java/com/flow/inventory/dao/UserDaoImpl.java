@@ -34,8 +34,8 @@ public class UserDaoImpl implements UserDao {
     public List<User> listUsers() {
         try {
             sessionFactory.getCurrentSession().beginTransaction();
-            List<User> users = sessionFactory.getCurrentSession().createCriteria(User.class).list();            
-            
+            List<User> users = sessionFactory.getCurrentSession().createCriteria(User.class).list();
+
             System.out.println("User Count: " + users.size());
 
             users.stream().forEach((user) -> {
@@ -60,7 +60,8 @@ public class UserDaoImpl implements UserDao {
 
         try {
 
-            session = sessionFactory.openSession();
+//            session = sessionFactory.openSession();
+            session = sessionFactory.getCurrentSession();
             Query query = session.createQuery(hql);
             query.setParameter("email", email);
             List<User> users = query.list();
@@ -73,10 +74,10 @@ public class UserDaoImpl implements UserDao {
                 return null;
             }
         } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-                session = null;
-            }
+//            if (session != null && session.isOpen()) {
+//                session.close();
+//                session = null;
+//            }
         }
     }
 
