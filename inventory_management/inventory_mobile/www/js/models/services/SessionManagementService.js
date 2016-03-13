@@ -6,10 +6,9 @@
 
 /* global Connection */
 
-var SessionManagementService = function (LocalDAS, UsersAPI, UsersDAO, CompaniesDAO, GroupsDAO, $q) {
+var SessionManagementService = function (LocalDAS, UsersAPI, UsersDAO, $q) {
 
     var ACTIVE_USER = "active_user";
-    var ACTIVE_USER_COMPANY = "company";
     var HOST = "host";
 
     SessionManagementService.WIFI = "CONNECTION_WIFI";
@@ -123,41 +122,26 @@ var SessionManagementService = function (LocalDAS, UsersAPI, UsersDAO, Companies
 
     this.login = function (loginData) {
 
-        var loggedInUser;
-        var loggedInUserCompany;
-
         var dfd = $q.defer();
-
         var server = UsersAPI.prependHttp(loginData.server);
 
         UsersAPI.login(server, loginData.email, loginData.password)
             .then(function (data) {
                 console.log(data);
                 //  TODO: validate user data
-                loggedInUser = data.results;
-                return registerCompany(loggedInUser, server);
-            })
-            //  company is now registered, update user data
-            .then(function (company) {
-                loggedInUserCompany = company;
-                return registerUser(loggedInUser, company, loginData.password);
-            })
-            .then(function () {
-                return registerGroups(loggedInUser);
-            }, function (error) {
-                dfd.reject(error);
-            })
-            .then(function () {
-                //  get the final active user data
-                return UsersDAO.getLastActiveUser();
+
+                var user = data.user;
+                user.server = server;
+                user.password = loginData.password;
+
+                return registerUser(user);
             }, function (error) {
                 dfd.reject(error);
             })
             .then(function (activeUser) {
                 //  save details locally for easy access
                 LocalDAS.setObject(ACTIVE_USER, activeUser);
-                LocalDAS.setObject(ACTIVE_USER_COMPANY, loggedInUserCompany);
-                LocalDAS.set(HOST, loggedInUserCompany.host);
+                LocalDAS.set(HOST, server);
 
                 console.log(activeUser);
                 activeUserCache = activeUser;
@@ -172,42 +156,14 @@ var SessionManagementService = function (LocalDAS, UsersAPI, UsersDAO, Companies
 
     };
 
-    function registerCompany(user, server) {
-        var dfd = $q.defer();
-
-        //  get company and then save to database
-        CompaniesDAO.find(user.company.id, server)
-            .then(function (company) {
-                if (!company) {
-                    //  create a company if it does not exist yet
-                    console.log("Creating new company " + user.company.name);
-                    return CompaniesDAO.insert(user.company, server);
-                } else {
-                    dfd.resolve(company);
-                }
-            }, function (error) {
-                console.error("Failed to find company: " + error);
-                dfd.reject(error);
-            })
-            .then(function (company) {
-                dfd.resolve(company);
-            }, function (companyInsertError) {
-                console.error(companyInsertError);
-                dfd.reject(companyInsertError);
-            });
-
-        return dfd.promise;
-
-    }
-
-    function registerUser(user, company, password) {
+    function registerUser(user) {
 
         var dfd = $q.defer();
 
         //  check if the user exists
-        UsersDAO.find(user.id, company.id)
+        UsersDAO.find(user.id, user.server)
             .then(function (registeredUser) {
-                var adaptedUser = adaptUserFromAPItoDAO(user, company, 1, password);  //  set as last active
+                var adaptedUser = adaptUserFromAPItoDAO(user, 1);  //  set as last active
 
                 if (registeredUser) {
                     //  user exists, update the user
@@ -232,36 +188,16 @@ var SessionManagementService = function (LocalDAS, UsersAPI, UsersDAO, Companies
 
     }
 
-    function registerGroups(user) {
-
-        if (user.groups && user.groups.length) {
-            var groupPromises = user.groups.map(function (group) {
-                //  use id and company id since this is unparsed version of user
-                group.user_web_id = user.id;
-                group.company_web_id = user.company_id;
-                GroupsDAO.saveGroup(group);
-            });
-
-            return $q.all(groupPromises);
-        } else {
-            return [];
-        }
-    }
-
-    function adaptUserFromAPItoDAO(user, company, lastActive, password) {
+    function adaptUserFromAPItoDAO(user, lastActive) {
         return {
             web_id: user.id,
             email: user.email,
-            display_name: user.display_name,
-            company_id: company.id,
+            display_name: user.displayName,
+            is_active: user.isActive,
             last_active: lastActive,
-            department: user.department,
-            department_id: user.department_id,
-            department_code: user.department_code,
-            position: user.position,
-            user_level_id: user.user_level_id,
-            image_url: user.image_url,
-            password: password  //  TODO: add encryption
+            description: user.description,
+            image_url: user.imageUrl,
+            password: user.password  //  TODO: add encryption
         };
     }
 

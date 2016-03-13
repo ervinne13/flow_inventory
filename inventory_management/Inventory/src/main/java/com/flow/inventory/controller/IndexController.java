@@ -25,22 +25,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class IndexController {
 
-    @Autowired
-    private UserService userService;
-
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView index() {        
-
-        ModelAndView mv = new ModelAndView("index");
-
-        User authenticatedUser = userService.getCurrentlyAuthenticatedUser();
-        if (authenticatedUser == null) {
-            throw new RuntimeException("Authenticated user null on access: please check your security configuration or the userService implementation.");
-        }
-
-        mv.addObject("authenticatedUser", authenticatedUser);
-
-        return mv;
+    public ModelAndView index() {
+        return new ModelAndView("index");
     }
 
     @RequestMapping(value = "/denied")

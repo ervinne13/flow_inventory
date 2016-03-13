@@ -26,7 +26,7 @@
                 </a>
             </li>
             <li>
-                <a href="<c:url value="/item/add"/>">
+                <a href="<c:url value="/items/create"/>">
                     <i class="fa fa-plus text-aqua"></i> <span>New Item</span>
                 </a>
             </li>
@@ -57,6 +57,12 @@
                     <i class="fa fa-money text-orange"></i> <span>Mark Sold Items</span>
                 </a>
             </li>
+            <li class="header">PARTNERS</li>             
+            <li>
+                <a href="<c:url value="/vendors"/>">
+                    <i class="fa fa-money text-fuchsia"></i> <span>Vendors</span>
+                </a>
+            </li>         
         </ul>
     </section>
     <!-- /.sidebar -->

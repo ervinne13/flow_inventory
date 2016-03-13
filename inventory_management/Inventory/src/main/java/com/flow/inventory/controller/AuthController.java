@@ -5,10 +5,9 @@
  */
 package com.flow.inventory.controller;
 
-import com.flow.inventory.adapter.UserAdapter;
 import com.flow.inventory.beans.LoginBean;
 import com.flow.inventory.beans.LoginBean.Validity;
-import com.flow.inventory.model.User;
+import com.flow.inventory.beans.LoginResponseBean;
 import com.flow.inventory.service.UserService;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.stereotype.Controller;
@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -64,22 +65,30 @@ public class AuthController {
 
     }
 
-    @RequestMapping(value = "/api/login", method = RequestMethod.POST)
-    public ResponseEntity<Object> apiLogin(@RequestParam("email") String email, @RequestParam("password") String password) {
+    @RequestMapping(value = "/api/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody
+    ResponseEntity<LoginResponseBean> apiLogin(@RequestParam("email") String email, @RequestParam("password") String password) {
 
         Validity validity = userService.authenticate(email, password);
+
+        LoginResponseBean loginResponseBean = new LoginResponseBean();
 
         switch (validity) {
             case VALID:
                 System.out.println("Valid!");
-                User authenticatedUser = userService.getCurrentlyAuthenticatedUser();
-                return new ResponseEntity<>(UserAdapter.toMultiValueMap(authenticatedUser), HttpStatus.OK);
+
+                loginResponseBean.setUser(userService.getCurrentlyAuthenticatedUser());
+                loginResponseBean.setMessage("SUCCESS!");
+                return new ResponseEntity<>(loginResponseBean, HttpStatus.OK);
             case UNREGISTERED:
-                return new ResponseEntity<>("Unregistered email", HttpStatus.BAD_REQUEST);
+                loginResponseBean.setMessage("Unregistered email");
+                return new ResponseEntity<>(loginResponseBean, HttpStatus.NOT_FOUND);
             case INCORRECT_PASSWORD:
-                return new ResponseEntity<>("Incorrect password", HttpStatus.BAD_REQUEST);
+                loginResponseBean.setMessage("Incorrect password");
+                return new ResponseEntity<>(loginResponseBean, HttpStatus.BAD_REQUEST);
             default:
-                return new ResponseEntity<>("Unknown error", HttpStatus.INTERNAL_SERVER_ERROR);
+                loginResponseBean.setMessage("Unknown Error");
+                return new ResponseEntity<>(loginResponseBean, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
     }

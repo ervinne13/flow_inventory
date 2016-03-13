@@ -16,7 +16,8 @@
     <body class="hold-transition login-page">
         <div class="login-box">
             <div class="login-logo">
-                <b>Flow</b>etc
+                <!--                <b>Flow</b>etc-->
+                ${commonAppNameHtml}
             </div><!-- /.login-logo -->
             <div class="login-box-body">                
                 <c:choose>

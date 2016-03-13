@@ -10,25 +10,25 @@
         <title>
             <jsp:invoke fragment="pageTitle"/>
         </title>
-        <jsp:include page="../jsp/partials/head-imports.jsp"/>
+        <jsp:include page="/WEB-INF/jsp/partials/head-imports.jsp"/>
     </head>
     <body class="hold-transition <jsp:invoke fragment="skin"/> sidebar-mini">
         <div class="wrapper">
             <!--Header-->
-            <jsp:include page="../jsp/partials/main-header.jsp"/>
+            <jsp:include page="/WEB-INF/jsp/partials/main-header.jsp"/>
 
             <!-- Left side column. contains the logo and sidebar -->
-            <jsp:include page="../jsp/partials/side-bar.jsp"/>
+            <jsp:include page="/WEB-INF/jsp/partials/side-bar.jsp"/>
 
             <jsp:doBody/>
 
-            <jsp:include page="../jsp/partials/footer.jsp" />
+            <jsp:include page="/WEB-INF/jsp/partials/footer.jsp" />
 
             <!-- Control Sidebar -->
-            <jsp:include page="../jsp/partials/control-side-bar.jsp" />
+            <jsp:include page="/WEB-INF/jsp/partials/control-side-bar.jsp" />
         </div><!-- ./wrapper -->
 
-        <jsp:include page="../jsp/partials/body-imports.jsp"/>
+        <jsp:include page="/WEB-INF/jsp/partials/body-imports.jsp"/>
 
         <jsp:invoke fragment="bodyImports"/>
     </body>

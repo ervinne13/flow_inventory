@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.flow.inventory.adapter;
+package com.flow.inventory.adapters;
 
 import com.flow.inventory.model.User;
 import java.util.Collection;
@@ -12,22 +12,12 @@ import java.util.Set;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 
 /**
  *
  * @author Ervinne Sodusta
  */
 public class UserAdapter {
-
-    public static MultiValueMap<String, Object> toMultiValueMap(User user) {
-
-        MultiValueMap map = new LinkedMultiValueMap();
-
-        return map;
-
-    }
 
     public static UserDetails toUserDetails(User user) {
 

@@ -6,10 +6,12 @@
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
-       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
 
     <!--<tx:annotation-driven transaction-manager="hibernateTransactionManager" />-->
     
@@ -23,6 +25,8 @@
     p:url="${jdbc.url}"
     p:username="${jdbc.username}"
     p:password="${jdbc.password}" /-->
+
+    <util:properties id="propertyConfigurer" location="/WEB-INF/info.properties"/>
 
     <!-- ADD PERSISTENCE SUPPORT HERE (jpa, hibernate, etc) -->
         
@@ -43,7 +47,9 @@
         <property name="annotatedClasses">
             <list>
                 <value>com.flow.inventory.model.User</value>
-                <value>com.flow.inventory.model.UserRole</value>                
+                <value>com.flow.inventory.model.UserRole</value>
+                <value>com.flow.inventory.model.UnitOfMeasurement</value>
+                <value>com.flow.inventory.model.Item</value>                
                 <value>com.flow.inventory.beans.LoginBean</value>
             </list>
         </property>

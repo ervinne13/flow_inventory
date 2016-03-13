@@ -15,18 +15,28 @@
         <!-- ionic/angularjs js -->
         <script src="lib/ionic/js/ionic.bundle.js"></script>
 
+        <script src="js/ng-cordova.min.js"></script>
+
         <!-- cordova script (this will be a 404 during development) -->
         <script src="cordova.js"></script>
 
-        <!--services-->
+        <!--api-->
+        <script src="js/models/api/UsersAPI.js"></script>
 
+        <!--dao-->
+        <script src="js/models/dao/DataAccessObject.js"></script>
+        <script src="js/models/dao/UsersDAO.js"></script>
+
+        <!--services-->
         <script src="js/models/services/LocalDataAccessService.js"></script>
         <script src="js/models/services/SQLiteDataAccessService.js"></script>
         <script src="js/models/services/SessionManagementService.js"></script>
+        <script src="js/models/services/StartupService.js"></script>
 
         <!-- your app's js -->
         <script src="js/app.js"></script>
         <script src="js/controllers.js"></script>
+        <script src="js/models.js"></script>
         <script src="js/services.js"></script>
     </head>
     <body ng-app="starter">

@@ -23,9 +23,12 @@
     }
 </style>
 
-<t:adminlte skin="skin-purple">
+<t:adminlte>
     <jsp:attribute name="pageTitle">
         Inventory | Admin
+    </jsp:attribute>
+    <jsp:attribute name="skin">
+        skin-purple
     </jsp:attribute>
     <jsp:attribute name="bodyImports">
         <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
@@ -56,7 +59,7 @@
                     <!-- Left col -->
                     <div class="col-md-8">                        
                         <!--Monthly Recap Report Box-->
-                        <div class="box">                           
+                        <div class="box">
                             <div class="box-header with-border">
                                 <h3 class="box-title">Monthly Recap Report</h3>
                                 <div class="box-tools pull-right">

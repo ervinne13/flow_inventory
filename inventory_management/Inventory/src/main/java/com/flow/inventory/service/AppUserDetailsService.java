@@ -5,7 +5,7 @@
  */
 package com.flow.inventory.service;
 
-import com.flow.inventory.adapter.UserAdapter;
+import com.flow.inventory.adapters.UserAdapter;
 import com.flow.inventory.dao.UserDao;
 import com.flow.inventory.model.User;
 import org.springframework.beans.factory.annotation.Autowired;

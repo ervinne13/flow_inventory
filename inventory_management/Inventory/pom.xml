@@ -10,8 +10,9 @@
     <name>Inventory</name>
 
     <properties>
-        <springframework.version>4.0.6.RELEASE</springframework.version>
+        <springframework.version>4.2.2.RELEASE</springframework.version>
         <hibernate.version>4.3.6.Final</hibernate.version>
+        <jackson.version>2.6.3</jackson.version>
         <mysql.connector.version>5.1.31</mysql.connector.version>
         <joda-time.version>2.3</joda-time.version>
         <testng.version>6.9.4</testng.version>
@@ -55,6 +56,19 @@
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>${log4j.version}</version>
+        </dependency>
+        
+        <!-- Jackson - for JSON -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
         </dependency>
         
         <!-- Spring -->

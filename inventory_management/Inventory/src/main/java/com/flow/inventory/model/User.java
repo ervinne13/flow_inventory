@@ -1,6 +1,7 @@
 package com.flow.inventory.model;
 // Generated Mar 10, 2016 2:37:53 PM by Hibernate Tools 4.3.1
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -84,6 +85,7 @@ public class User implements java.io.Serializable {
     }
 
     @Column(name = "password")
+    @JsonIgnore
     public String getPassword() {
         return this.password;
     }
@@ -93,6 +95,7 @@ public class User implements java.io.Serializable {
     }
 
     @OneToMany(mappedBy = "user", targetEntity = UserRole.class, fetch = FetchType.LAZY)
+    @JsonIgnore
     public Set getUserRoles() {
         return this.userRoles;
     }

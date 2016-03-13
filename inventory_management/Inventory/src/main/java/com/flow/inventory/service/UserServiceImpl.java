@@ -5,6 +5,7 @@
  */
 package com.flow.inventory.service;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.flow.inventory.beans.LoginBean.Validity;
 import com.flow.inventory.dao.UserDao;
 import com.flow.inventory.dao.UserDao.UserDaoException;
@@ -40,7 +41,6 @@ public class UserServiceImpl implements UserService {
         String email = auth.getName();
 
         return userDao.getUserByEmail(email);
-
     }
 
     @Override
