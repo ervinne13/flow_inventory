@@ -1,0 +1,26 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+
+    Styles that apply to all components found in the application
+
+    Created on : Mar 21, 2016, 8:47:02 PM
+    Author     : Ervinne Sodusta
+*/
+
+.control-label-right {
+    text-align: left;
+    padding-top: 7px;
+    padding-left: 0px;
+}
+
+.select2 {
+    width: 100%;
+}
+
+.vertical-spacer {
+    margin-top: 20px;
+}

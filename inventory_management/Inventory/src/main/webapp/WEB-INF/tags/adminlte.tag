@@ -1,4 +1,5 @@
 <%@tag description="Admin LTE Page Template Tag" pageEncoding="UTF-8"%>
+<%@attribute name="headImports" fragment="true" %>
 <%@attribute name="bodyImports" fragment="true" %>
 <%@attribute name="pageTitle" required="true" fragment="true" %>
 <%@attribute name="skin" required="true" fragment="true" %>
@@ -11,6 +12,9 @@
             <jsp:invoke fragment="pageTitle"/>
         </title>
         <jsp:include page="/WEB-INF/jsp/partials/head-imports.jsp"/>
+        
+        <jsp:invoke fragment="headImports"/>
+        
     </head>
     <body class="hold-transition <jsp:invoke fragment="skin"/> sidebar-mini">
         <div class="wrapper">
