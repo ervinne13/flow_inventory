@@ -19,11 +19,12 @@
     <jsp:attribute name="skin">
         skin-purple
     </jsp:attribute>
+    <jsp:attribute name="headImports">
+        <link rel="stylesheet" href="<c:url value="/resources/plugins/iCheck/square/blue.css"/>">
+    </jsp:attribute>
     <jsp:attribute name="bodyImports">
-        <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-        <script src="<c:url value="/resources/lib/AdminLTE/js/pages/dashboard2.js" />"></script>
-        <!-- AdminLTE for demo purposes -->
-        <script src="<c:url value="/resources/lib/AdminLTE/js/demo.js"/>"></script>
+        <script src="<c:url value="/resources/plugins/iCheck/icheck.min.js" />"></script>
+        <script src="<c:url value="/resources/js/pages/items/create.js" />"></script>        
     </jsp:attribute>
     <jsp:body>
         <div class="content-wrapper">
@@ -41,17 +42,17 @@
             <!-- Main content -->
             <section class="content">
 
-                <div class="row">
-                    <!-- Main Info col -->
-                    <div class="col-md-6">  
-                        <div class="box box-info">
-                            <div class="box-header with-border">
-                                <h3 class="box-title">Item Details</h3>
-                            </div>
-                            <div class="box-body">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <form:form id="loginForm" method="post" action="items" modelAttribute="itemBean">
+                <form:form id="create-item-form" method="POST" action="${pageContext.request.contextPath}/items" modelAttribute="itemBean">
+                    <div class="row">
+                        <!-- Main Info col -->
+                        <div class="col-md-8">  
+                            <div class="box box-info">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">Item Details</h3>
+                                </div>
+                                <div class="box-body">
+                                    <div class="row">
+                                        <div class="col-md-12">                                        
                                             <div class="form-group has-feedback">                                                
                                                 <label>Item Name</label>
                                                 <b>
@@ -67,25 +68,75 @@
                                                     </c:forEach>
                                                 </select>
                                             </div>
-                                        </form:form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Purchasing Info col -->
-                    <div class="col-md-4">  
-                        <div class="box box-info">
-                            <div class="box-header with-border">
-                                <h3 class="box-title">Purchasing Details</h3>
-                            </div>
-                            <div class="box-body">
-                                <div class="row">                        
+                    <div class="row">
+                        <!-- Selling Info col -->
+                        <div class="col-md-4">  
+                            <div class="box box-info">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">Selling Details</h3>
                                 </div>
-                            </div>
+                                <div class="box-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="checkbox icheck">
+                                                <label>
+                                                    <input name="isCanBeSold" type="checkbox"> Can Be Sold
+                                                </label>
+                                            </div>
+                                            <div class="form-group">                                                
+                                                <label>Sale Value</label>
+                                                <b>
+                                                    <form:input id="saleValue" name="saleValue" path="saleValue" type='numeric' class='form-control'/>
+                                                </b>                                                                     
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                        
+                        </div>
+                        <!-- Purchasing Info col -->
+                        <div class="col-md-4">  
+                            <div class="box box-info">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">Purchasing Details</h3>
+                                </div>
+                                <div class="box-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="checkbox icheck">
+                                                <label>
+                                                    <input name="can_be_purchased" type="checkbox"> Can Be Purchased
+                                                </label>
+                                            </div>
+                                            <div class="form-group">                                                
+                                                <label>Purchase Value</label>
+                                                <b>
+                                                    <form:input id="purchaseValue" name="purchaseValue" path="purchaseValue" type='numeric' class='form-control'/>
+                                                </b>                                                                     
+                                            </div>
+                                            <select name="vendor_id" class="form-control">
+                                                <option value="0" disabled></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                        
                         </div>                        
                     </div>
-                </div>
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="pull-right">                        
+                                <button type="submit" class="btn btn-primary btn-block btn-flat">Create</button>
+                            </div>
+                        </div>
+                    </div>
+                </form:form>
 
             </section>
 

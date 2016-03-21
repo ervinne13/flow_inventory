@@ -36,16 +36,17 @@
     
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/login"/>
-            <mvc:exclude-mapping path="/resources/**"/>             
-            <bean class="com.flow.inventory.interceptors.CommonViewAttributesInterceptor" />
-        </mvc:interceptor>
-        <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/login"/>             
             <mvc:exclude-mapping path="/resources/**"/>             
             <bean class="com.flow.inventory.interceptors.AuthenticatedViewAttritubesInterceptor" />
         </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:mapping path="/login"/>
+            <mvc:exclude-mapping path="/resources/**"/>             
+            <bean class="com.flow.inventory.interceptors.CommonViewAttributesInterceptor" />
+        </mvc:interceptor>        
     </mvc:interceptors>
     
 </beans>

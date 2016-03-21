@@ -30,7 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
  *
  * @author Ervinne Sodusta
  */
-@Controller
+@Controller()
 public class AuthController {
 
     @Autowired

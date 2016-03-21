@@ -8,37 +8,28 @@
             http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 
     <!-- Configuring RoleVoter bean to use custom access roles, by default roles 
-    should be in the form ROLE_{XXX} -->
-    <beans:bean id="roleVoter"
-                class="org.springframework.security.access.vote.RoleVoter">
-        <beans:property name="rolePrefix" value=""></beans:property>
-    </beans:bean>
-    
-    <beans:bean id="accessDecisionManager"
-                class="org.springframework.security.access.vote.AffirmativeBased">
-        <beans:constructor-arg name="decisionVoters"
-                               ref="roleVoter" />
-    </beans:bean>
+    should be in the form ROLE_{XXX} -->    
  
-    <http authentication-manager-ref="service-auth"
-          access-decision-manager-ref="accessDecisionManager"> 
-        <intercept-url pattern="/" access="USER,ADMIN" />
-        <intercept-url pattern="/test" access="USER" />
+    <http authentication-manager-ref="authService" auto-config="true" use-expressions="true">         
+        <intercept-url pattern="/login/**" access="permitAll" />
+        <intercept-url pattern="/denied/**" access="permitAll" />
+        <intercept-url pattern="/j_spring_security_logout/**" access="permitAll" />
+        <intercept-url pattern="/resources/**" access="permitAll" />
+        
+        <intercept-url pattern="/**" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')" />        
         <form-login login-page="/login" 
                     authentication-failure-url="/denied"
-                    username-parameter="email" 
-                    password-parameter="password"
-                    default-target-url="/home" />
+                    default-target-url="/" />
         <logout invalidate-session="true" logout-success-url="/login"
                 logout-url="/j_spring_security_logout" />
-        <access-denied-handler error-page="/denied"/>
+        <!--        <access-denied-handler error-page="/denied"/>
         <session-management invalid-session-url="/login">
             <concurrency-control max-sessions="1"
                                  expired-url="/login" />
-        </session-management>
+        </session-management>-->
     </http>
  
-    <authentication-manager id="service-auth">
+    <authentication-manager id="authService">
         <authentication-provider user-service-ref="userDetailsService">
             <password-encoder hash="bcrypt" />
         </authentication-provider>
