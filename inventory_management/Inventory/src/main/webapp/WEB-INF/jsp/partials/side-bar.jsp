@@ -57,12 +57,17 @@
                     <i class="fa fa-money text-orange"></i> <span>Mark Sold Items</span>
                 </a>
             </li>
-            <li class="header">PARTNERS</li>             
+            <li class="header">RELATIONSHIPS</li>             
             <li>
-                <a href="<c:url value="/vendors"/>">
-                    <i class="fa fa-money text-fuchsia"></i> <span>Vendors</span>
+                <a href="<c:url value="/partners"/>">
+                    <i class="fa fa-group text-fuchsia"></i> <span>Partners</span>
                 </a>
-            </li>         
+            </li>
+            <li>
+                <a href="<c:url value="/partners/create"/>">
+                    <i class="fa fa-plus text-fuchsia"></i> <span>New Partner</span>
+                </a>
+            </li>
         </ul>
     </section>
     <!-- /.sidebar -->

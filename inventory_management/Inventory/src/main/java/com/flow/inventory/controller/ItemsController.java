@@ -46,7 +46,7 @@ public class ItemsController {
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView create() {
-        ModelAndView mv = new ModelAndView("items/create");
+        ModelAndView mv = new ModelAndView("items/create2");
 
         Item blankItem = new Item();
 

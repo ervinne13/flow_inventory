@@ -31,7 +31,7 @@ public class CommonViewAttributesInterceptor extends HandlerInterceptorAdapter {
 
         //  FIXME: put values on a properties file later
         request.setAttribute(ATTR_APP_NAME_HTML, "<span class=\"logo-lg\"><b>Inventory</b>etc</span>");
-        request.setAttribute(ATTR_APP_NAME_MINI_HTML, "<span class=\"logo-mini\"><b>I</b>e</span>");
+        request.setAttribute(ATTR_APP_NAME_MINI_HTML, "<span class=\"logo-mini\"><b>INV</b></span>");
 
         request.setAttribute(ATTR_APP_AUTHOR, "Ervinne Sodusta");
         request.setAttribute(ATTR_APP_AUTHOR_WEBSITE, "https://www.facebook.com/ervinne.sodusta");
