@@ -21,14 +21,20 @@
     </jsp:attribute>
     <jsp:attribute name="headImports">
         <link rel="stylesheet" href="<c:url value="/resources/plugins/iCheck/square/blue.css"/>">
-        <link rel="stylesheet" href="<c:url value="/resources/plugins/select2/select2.min.css"/>">
+        <link rel="stylesheet" href="<c:url value="/resources/plugins/select2/select2.min.css"/>">        
 
         <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>">
     </jsp:attribute>
     <jsp:attribute name="bodyImports">
         <script src="<c:url value="/resources/plugins/iCheck/icheck.min.js" />"></script>
         <script src="<c:url value="/resources/plugins/select2/select2.min.js" />"></script>
+
+        <script src="<c:url value="/resources/plugins/tabledit/jquery.tabledit.js" />"></script>        
+
+        <script src="<c:url value="/resources/js/form-utils.js" />"></script>        
+
         <script src="<c:url value="/resources/js/pages/partners/create.js" />"></script>        
+        <script src="<c:url value="/resources/js/pages/partners/address-table.js" />"></script>        
     </jsp:attribute>
     <jsp:body>
         <div class="content-wrapper">
@@ -47,7 +53,7 @@
             <section class="content">
 
                 <div class="row">
-                    <div class="col-md-12">  
+                    <div class="col-md-12">                          
                         <div class="box box-info">
                             <div class="box-header with-border">
                                 <h3 class="box-title">Item Details</h3>
@@ -55,7 +61,7 @@
                             <div class="box-body">
                                 <div class="row">
                                     <div class="col-md-8">                                        
-                                        <jsp:include page="partner-form.jsp"/>
+                                        <jsp:include page="partner-form-fields.jsp"/>
                                     </div>
 
                                     <!--Right text-->
@@ -72,6 +78,19 @@
                                     </div>
                                 </div>
 
+                                <hr>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <jsp:include page="address-table.jsp"/>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <button id="add-address" class="btn-link center-block"><i class="fa fa-plus"></i> Add Address</button>
+                                    </div>
+                                </div>
                             </div>
                             <div class="box-footer">
                                 <div>
@@ -79,9 +98,9 @@
                                     <button id="clear-partner" class="pull-left btn btn-default">Clear</button>
                                 </div>
                             </div>
-                        </div>
+                        </div>                       
                     </div>                    
-                </div>   
+                </div>
 
             </section>
 

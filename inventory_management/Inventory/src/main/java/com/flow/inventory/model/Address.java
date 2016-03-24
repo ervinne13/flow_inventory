@@ -7,7 +7,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -18,7 +17,7 @@ import javax.persistence.Table;
 public class Address implements java.io.Serializable {
 
     private Integer id;
-    private AddressType addressType;
+    private String addressType;
     private String contactName;
     private String email;
     private String phone;
@@ -32,12 +31,12 @@ public class Address implements java.io.Serializable {
     public Address() {
     }
 
-    public Address(AddressType addressType, String contactName) {
+    public Address(String addressType, String contactName) {
         this.addressType = addressType;
         this.contactName = contactName;
     }
 
-    public Address(AddressType addressType, String contactName, String email, String phone, String mobile, String address1, String address2, String website, String notes, Partner partner) {
+    public Address(String addressType, String contactName, String email, String phone, String mobile, String address1, String address2, String website, String notes, Partner partner) {
         this.addressType = addressType;
         this.contactName = contactName;
         this.email = email;
@@ -61,12 +60,12 @@ public class Address implements java.io.Serializable {
         this.id = id;
     }
 
-    @ManyToOne(targetEntity = AddressType.class)
-    public AddressType getAddressType() {
+    @Column(name = "address_type")
+    public String getAddressType() {
         return this.addressType;
     }
 
-    public void setAddressType(AddressType addressType) {
+    public void setAddressType(String addressType) {
         this.addressType = addressType;
     }
 
