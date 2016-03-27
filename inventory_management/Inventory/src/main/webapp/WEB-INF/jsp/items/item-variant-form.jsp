@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <form>
@@ -17,8 +18,16 @@
             <div class="col-sm-6">
                 <input id="name" class="form-control" placeholder="e.g. Black Forest Cake w/ Cherry" type="text">
             </div>
+
             <div class="col-sm-3">
-                <input class="icheck" type="checkbox"> Default?
+                <c:choose>
+                    <c:when test="${param.isDefault}">            
+                        <input id="expires" class="icheck" type="hidden" value="true">
+                    </c:when>
+                    <c:otherwise>
+                        <input class="icheck" type="checkbox"> Default?                        
+                    </c:otherwise>
+                </c:choose>
             </div>  
         </div>
     </div>
@@ -64,7 +73,7 @@
                 <input id="purchase-price" class="form-control" placeholder="PHP" type="number">
             </div>                                       
         </div>
-    </div>
+    </div>    
 
     <div class="row">
         <div class="form-group col-sm-12">                                            
@@ -76,5 +85,4 @@
             </div>
         </div>
     </div>
-
 </form>

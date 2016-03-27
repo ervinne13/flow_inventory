@@ -5,8 +5,6 @@
  */
 package com.flow.inventory.interceptors;
 
-import static com.flow.inventory.interceptors.CommonViewAttributesInterceptor.ATTR_APP_NAME_HTML;
-import static com.flow.inventory.interceptors.CommonViewAttributesInterceptor.ATTR_APP_NAME_MINI_HTML;
 import com.flow.inventory.model.User;
 import com.flow.inventory.service.UserService;
 import javax.servlet.http.HttpServletRequest;

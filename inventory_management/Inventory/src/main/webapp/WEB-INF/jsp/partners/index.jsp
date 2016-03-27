@@ -27,21 +27,38 @@
         <script src="<c:url value="/resources/js/pages/items/create.js" />"></script>        
     </jsp:attribute>
     <jsp:body>
-        <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <section class="content-header">
-                <h1>
-                    Partners
-                </h1>
-                <ol class="breadcrumb">                    
-                    <li class="active">Partners</li>
-                </ol>
-            </section>
-
+        <div class="content-wrapper">            
             <!-- Main content -->
             <section class="content">
+                <div class="row">
+                    <div class="col-md-12">                          
+                        <div class="box box-info">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Partners</h3>
+                            </div>
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <jsp:include page="partners-table.jsp"/>
+                                    </div>
 
+                                    <!--Right text-->
+                                    <div class="col-md-4">
+                                        <h3>Setup your partners</h3>
 
+                                        <p>
+                                            Customers are used for Sales Orders, while Vendors are used in Purchase Orders.                                             
+                                        </p>
+
+                                        <a class="btn btn-info" href="<c:url value="/partners/create"/>">
+                                            <i class="fa fa-plus"></i> <span>Create a New Partner</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                       
+                    </div>                    
+                </div>
             </section>
 
         </div>

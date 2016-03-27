@@ -5,23 +5,17 @@
  */
 package com.flow.inventory.dao;
 
-import com.flow.inventory.model.Partner;
+import com.flow.inventory.model.Variant;
 import java.util.List;
 
 /**
  *
  * @author Ervinne Sodusta
  */
-public interface PartnersDao {
+public interface VariantsDao {
 
-    List<Partner> listPartners();
+    public List<Variant> listVariants(int offset, int fetchCount, String filter);
 
-    List<Partner> listVendors();
-
-    Partner getById(int id);
-
-    void addPartner(Partner partner);
-
-    void updatePartner(Partner partner);
+    public void saveVariant(Variant variant);
 
 }

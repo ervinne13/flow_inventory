@@ -4,23 +4,19 @@
  * and open the template in the editor.
  */
 
-/* global Tabledit */
+var contacts_table = {};
 
-var address_table = {};
-
-(function (address_table) {
+(function (contacts_table) {
 
     var lastUsedTemporaryId = 0;
-    var $addressTable;
+    var $contactsTable;
 
     var editableRows = [
-        [1, 'label'],
-        [2, 'address'],
-        [3, 'city'],
-        [4, 'email'],
-        [5, 'zip'],
-        [6, 'phone'],
-        [7, 'notes']
+        [1, 'name'],
+        [2, 'email'],
+        [3, 'title'],
+        [4, 'phone'],
+        [5, 'notes']
     ];
 
     $(document).ready(function () {
@@ -30,7 +26,7 @@ var address_table = {};
 
     function setupEditableTable() {
 
-        $addressTable = $('#address-table').Tabledit({
+        $contactsTable = $('#contacts-table').Tabledit({
             hideIdentifier: true,
             autoFocus: true,
             onEnterBehavior: 'FOCUS_NEXT_FIELD',
@@ -49,11 +45,10 @@ var address_table = {};
     }
 
     function initializeEvents() {
-        $('#add-address').click(addBlankAddress);
+        $('#add-contact').click(addBlankContact);
     }
 
-    function addBlankAddress() {
-
+    function addBlankContact() {
         var rowHtmlString = '<tr class="temp-row">';
 
         //  TODO: move this to an html template later
@@ -66,14 +61,13 @@ var address_table = {};
 
         rowHtmlString += "</tr>";
 
-        $('#address-table > tbody').append(rowHtmlString);
-        $addressTable.notifyDataSetChanged('edit');
-
+        $('#contacts-table > tbody').append(rowHtmlString);
+        $contactsTable.notifyDataSetChanged('edit');
     }
 
     //  public members
-    address_table.getTableData = function () {
-        return $addressTable.getTableData();
+    contacts_table.getTableData = function () {
+        return $contactsTable.getTableData();
     };
 
-})(address_table);
+})(contacts_table);

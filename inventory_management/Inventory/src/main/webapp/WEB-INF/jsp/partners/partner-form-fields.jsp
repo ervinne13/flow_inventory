@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <div id="partner-form-fields-container" class="form-horizontal">
     <div class="form-group col-sm-12">
@@ -13,30 +14,28 @@
         </label>
 
         <div class="col-sm-6">
-            <input id="name" name="name" class="form-control" placeholder="e.g. Alter Trade Corp." type="text">
+            <form:input id="name" name="name" class="form-control" placeholder="e.g. Alter Trade Corp." type="text" path="name" />
         </div>
     </div>
 
     <div class="form-group col-sm-12">
         <label class="col-sm-3 control-label" for="primary-contact">
-            <span>Contact Number</span>
+            <span>Primary Contact Number</span>
         </label>
 
         <div class="col-sm-6">
-            <input id="primary-contact" name="primary_contact" class="form-control" placeholder="" type="text">
+            <form:input  id="primary-contact" name="primary_contact" class="form-control" placeholder="" type="text" path="primaryContact"  />
         </div>
     </div>
 
-    <div class="form-group col-sm-12">                                            
-        <label class="col-sm-3 control-label" for="vendor">
-            Type
-        </label>
 
-        <div class="col-sm-6">            
-            <select id="partner-type" name="partner_type_id" class="select2">                
-                <option value="2">Company</option>
-                <option value="1">Individual</option>
-            </select>
+    <div class="form-group col-sm-12">
+        <div class="col-sm-3 col-sm-offset-3">
+            <form:checkbox id="vendor" class="icheck" path="vendor"/> Vendor?
         </div>
+        <div class="col-sm-3">
+            <form:checkbox id="customer" class="icheck" path="customer" /> Customer?
+        </div>   
     </div>
+
 </div>

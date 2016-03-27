@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.flow.inventory.dao;
+package com.flow.inventory.service;
 
 import com.flow.inventory.model.Partner;
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author Ervinne Sodusta
  */
-public interface PartnersDao {
+public interface PartnersService {
 
     List<Partner> listPartners();
 
@@ -23,5 +23,4 @@ public interface PartnersDao {
     void addPartner(Partner partner);
 
     void updatePartner(Partner partner);
-
 }

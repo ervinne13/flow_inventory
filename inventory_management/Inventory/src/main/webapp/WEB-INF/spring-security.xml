@@ -30,12 +30,12 @@
     </http>
  
     <authentication-manager id="authService">
-        <authentication-provider user-service-ref="userDetailsService">
+        <authentication-provider user-service-ref="appUserDetailsService">
             <password-encoder hash="bcrypt" />
         </authentication-provider>
     </authentication-manager>    
          
-    <beans:bean id="userDetailsService"
+    <beans:bean id="appUserDetailsService"
                 class="com.flow.inventory.service.AppUserDetailsService" />
          
 </beans:beans>

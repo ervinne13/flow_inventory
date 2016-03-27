@@ -28,17 +28,16 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Ervinne Sodusta
  */
 @Entity
-@Table(name = "addresses")
+@Table(name = "contacts")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Address.findAll", query = "SELECT a FROM Address a"),
-    @NamedQuery(name = "Address.findById", query = "SELECT a FROM Address a WHERE a.id = :id"),
-    @NamedQuery(name = "Address.findByLabel", query = "SELECT a FROM Address a WHERE a.label = :label"),
-    @NamedQuery(name = "Address.findByCity", query = "SELECT a FROM Address a WHERE a.city = :city"),
-    @NamedQuery(name = "Address.findByZip", query = "SELECT a FROM Address a WHERE a.zip = :zip"),
-    @NamedQuery(name = "Address.findByPhone", query = "SELECT a FROM Address a WHERE a.phone = :phone"),
-    @NamedQuery(name = "Address.findByEmail", query = "SELECT a FROM Address a WHERE a.email = :email")})
-public class Address implements Serializable {
+    @NamedQuery(name = "Contact.findAll", query = "SELECT c FROM Contact c"),
+    @NamedQuery(name = "Contact.findById", query = "SELECT c FROM Contact c WHERE c.id = :id"),
+    @NamedQuery(name = "Contact.findByEmail", query = "SELECT c FROM Contact c WHERE c.email = :email"),
+    @NamedQuery(name = "Contact.findByName", query = "SELECT c FROM Contact c WHERE c.name = :name"),
+    @NamedQuery(name = "Contact.findByTitle", query = "SELECT c FROM Contact c WHERE c.title = :title"),
+    @NamedQuery(name = "Contact.findByPhone", query = "SELECT c FROM Contact c WHERE c.phone = :phone")})
+public class Contact implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -46,31 +45,24 @@ public class Address implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 32)
-    @Column(name = "label")
-    private String label;
-    @Size(max = 32)
-    @Column(name = "city")
-    private String city;
-    @Size(max = 10)
-    @Column(name = "zip")
-    private String zip;
-    // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
-    @Size(max = 32)
-    @Column(name = "phone")
-    private String phone;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
-    @Size(max = 45)
+    @Size(min = 1, max = 64)
     @Column(name = "email")
     private String email;
     @Basic(optional = false)
     @NotNull
-    @Lob
-    @Size(min = 1, max = 65535)
-    @Column(name = "address")
-    private String address;
+    @Size(min = 1, max = 32)
+    @Column(name = "name")
+    private String name;
+    @Size(max = 64)
+    @Column(name = "title")
+    private String title;
+    // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
+    @Size(max = 32)
+    @Column(name = "phone")
+    private String phone;
     @Lob
     @Size(max = 65535)
     @Column(name = "notes")
@@ -80,17 +72,17 @@ public class Address implements Serializable {
     @ManyToOne(optional = false)
     private Partner partner;
 
-    public Address() {
+    public Contact() {
     }
 
-    public Address(Integer id) {
+    public Contact(Integer id) {
         this.id = id;
     }
 
-    public Address(Integer id, String label, String address) {
+    public Contact(Integer id, String email, String name) {
         this.id = id;
-        this.label = label;
-        this.address = address;
+        this.email = email;
+        this.name = name;
     }
 
     public Integer getId() {
@@ -101,38 +93,6 @@ public class Address implements Serializable {
         this.id = id;
     }
 
-    public String getLabel() {
-        return label;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getZip() {
-        return zip;
-    }
-
-    public void setZip(String zip) {
-        this.zip = zip;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -141,12 +101,28 @@ public class Address implements Serializable {
         this.email = email;
     }
 
-    public String getAddress() {
-        return address;
+    public String getName() {
+        return name;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getNotes() {
@@ -175,16 +151,19 @@ public class Address implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Address)) {
+        if (!(object instanceof Contact)) {
             return false;
         }
-        Address other = (Address) object;
-        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
+        Contact other = (Contact) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public String toString() {
-        return "com.flow.inventory.model.Address[ id=" + id + " ]";
+        return "com.flow.inventory.model.Contact[ id=" + id + " ]";
     }
 
 }

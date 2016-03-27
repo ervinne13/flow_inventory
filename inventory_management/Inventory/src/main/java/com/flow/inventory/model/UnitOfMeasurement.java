@@ -1,13 +1,10 @@
 package com.flow.inventory.model;
 // Generated Mar 10, 2016 2:37:53 PM by Hibernate Tools 4.3.1
 
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -19,18 +16,12 @@ public class UnitOfMeasurement implements java.io.Serializable {
 
     private long id;
     private String name;
-    private Set items = new HashSet(0);
 
     public UnitOfMeasurement() {
     }
 
     public UnitOfMeasurement(String name) {
         this.name = name;
-    }
-
-    public UnitOfMeasurement(String name, Set itemses) {
-        this.name = name;
-        this.items = itemses;
     }
 
     @Id
@@ -51,16 +42,6 @@ public class UnitOfMeasurement implements java.io.Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    @OneToOne(targetEntity = Item.class)
-//    @JoinColumn(name = "id", referencedColumnName = "unit_of_measurement_id")
-    public Set getItems() {
-        return this.items;
-    }
-
-    public void setItems(Set items) {
-        this.items = items;
     }
 
 }

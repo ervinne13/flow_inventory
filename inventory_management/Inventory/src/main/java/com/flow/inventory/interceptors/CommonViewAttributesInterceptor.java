@@ -30,7 +30,7 @@ public class CommonViewAttributesInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         //  FIXME: put values on a properties file later
-        request.setAttribute(ATTR_APP_NAME_HTML, "<span class=\"logo-lg\"><b>Inventory</b>etc</span>");
+        request.setAttribute(ATTR_APP_NAME_HTML, "<span class=\"logo-lg\"><b>Flow</b>etc</span>");
         request.setAttribute(ATTR_APP_NAME_MINI_HTML, "<span class=\"logo-mini\"><b>INV</b></span>");
 
         request.setAttribute(ATTR_APP_AUTHOR, "Ervinne Sodusta");

@@ -14,7 +14,7 @@
 
 <t:adminlte>
     <jsp:attribute name="pageTitle">
-        Inventory | Admin
+        Inventory
     </jsp:attribute>
     <jsp:attribute name="skin">
         skin-purple
@@ -29,11 +29,12 @@
         <script src="<c:url value="/resources/plugins/iCheck/icheck.min.js" />"></script>
         <script src="<c:url value="/resources/plugins/select2/select2.min.js" />"></script>
 
-        <script src="<c:url value="/resources/plugins/tabledit/jquery.tabledit.js" />"></script>        
+        <script src="<c:url value="/resources/js/jquery.tabledit.js" />"></script>        
 
         <script src="<c:url value="/resources/js/form-utils.js" />"></script>        
 
-        <script src="<c:url value="/resources/js/pages/partners/create.js" />"></script>        
+        <script src="<c:url value="/resources/js/pages/partners/edit.js" />"></script>        
+        <script src="<c:url value="/resources/js/pages/partners/contacts-table.js" />"></script>        
         <script src="<c:url value="/resources/js/pages/partners/address-table.js" />"></script>        
     </jsp:attribute>
     <jsp:body>
@@ -60,47 +61,59 @@
                             </div>
                             <div class="box-body">
                                 <div class="row">
-                                    <div class="col-md-8">                                        
-                                        <jsp:include page="partner-form-fields.jsp"/>
+                                    <div class="col-md-8">
+                                        <form:form id="partnerForm" method="POST" action="partners" modelAttribute="partner">
+                                            <jsp:include page="partner-form-fields.jsp"/>
+                                        </form:form>
                                     </div>
 
                                     <!--Right text-->
                                     <div class="col-md-4">
-                                        <h3>Partner Details</h3>
-
-                                        <p>
-                                            Enter the partner's details here.
-                                        </p>
-
-                                        <p>
-                                            Fill up his addresses and contact information below.
-                                        </p>
+                                        <jsp:include page="form-description.jsp"/>
                                     </div>
                                 </div>
-
-                                <hr>
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <jsp:include page="address-table.jsp"/>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <button id="add-address" class="btn-link center-block"><i class="fa fa-plus"></i> Add Address</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="box-footer">
-                                <div>
-                                    <button id="save-partner" class="pull-right btn btn-success">Save</button>
-                                    <button id="clear-partner" class="pull-left btn btn-default">Clear</button>
-                                </div>
-                            </div>
+                            </div>                           
                         </div>                       
-                    </div>                    
+                    </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="nav-tabs-custom">
+                            <ul class="nav nav-tabs">
+                                <li class="active">
+                                    <a aria-expanded="true" href="#tab_contacts" data-toggle="tab">Contacts</a>
+                                </li>
+                                <li class="">
+                                    <a aria-expanded="false" href="#tab_addresses" data-toggle="tab">Addresses</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="tab_contacts">
+                                    <jsp:include page="contacts-table.jsp" />
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button id="add-contact" type="button" class="btn-link center-block"><i class="fa fa-plus"></i> Add Contact</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane" id="tab_addresses">
+                                    <jsp:include page="address-table.jsp" />
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button id="add-address" type="button" class="btn-link center-block"><i class="fa fa-plus"></i> Add Address</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>                                            
+                    </div>
+                </div>
+
+                <button id="save-partner" type="button" class="pull-right btn btn-success">Save</button>
 
             </section>
 

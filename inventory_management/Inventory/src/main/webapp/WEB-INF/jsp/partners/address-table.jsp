@@ -5,22 +5,37 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <table id="address-table" class="table table-striped">
     <thead>
         <tr>            
             <th></th>
-            <th>Type</th>
+            <th>Label</th>
+            <th>Address</th>
+            <th>City</th>
             <th>Email</th>
-            <th>Phone</th>
-            <th>Address 1</th>
-            <th>Address 2</th>
-            <th>Website</th>
+            <th>Zip</th>
+            <th>Phone</th>            
             <th>Notes</th>
         </tr>
     </thead>
     <tbody>
+        <c:if test="${partner != null}">
+            <c:forEach items="${partner.addressList}" var="address">
+                <tr>
+                    <td>${address.id}</td>
+                    <td>${address.label}</td>
+                    <td>${address.address}</td>
+                    <td>${address.city}</td>
+                    <td>${address.email}</td>
+                    <td>${address.zip}</td>
+                    <td>${address.phone}</td>
+                    <td>${address.notes}</td>
+                </tr>
+            </c:forEach>
+        </c:if>
 
     </tbody>   
 </table>

@@ -7,6 +7,7 @@ package com.flow.inventory.controller;
 
 import com.flow.inventory.model.Item;
 import com.flow.inventory.service.ItemsService;
+import com.flow.inventory.service.PartnersService;
 import com.flow.inventory.service.UnitOfMeasurementService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,9 +34,17 @@ public class ItemsController {
     @Autowired
     private UnitOfMeasurementService unitOfMeasurementService;
 
+    @Autowired
+    private PartnersService partnersService;
+
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView index() {
-        return new ModelAndView("items/index");
+
+        ModelAndView mv = new ModelAndView("items/index");
+        mv.addObject("uomList", unitOfMeasurementService.listUOM());
+        mv.addObject("vendorList", partnersService.listVendors());
+
+        return mv;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -50,11 +59,9 @@ public class ItemsController {
 
         Item blankItem = new Item();
 
-        blankItem.setPurchaseValue(0);
-        blankItem.setSaleValue(0);
-
-        mv.addObject("itemBean", blankItem);
+        mv.addObject("item", blankItem);
         mv.addObject("uomList", unitOfMeasurementService.listUOM());
+        mv.addObject("vendorList", partnersService.listVendors());
 
         return mv;
     }
@@ -63,22 +70,21 @@ public class ItemsController {
     public ModelAndView store(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("itemBean") Item item) {
 
         //  TODO: Add validation here
-        itemsService.save(item);
-
-        return new ModelAndView("redirect:items");
+//        itemsService.save(item);
+        return new ModelAndView("redirect:items/edit/" + 1);
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public ModelAndView edit(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") String id) {
-        ModelAndView mv = new ModelAndView("items/update");
+        ModelAndView mv = new ModelAndView("items/edit");
 
         Item blankItem = new Item();
 
-        blankItem.setPurchaseValue(0);
-        blankItem.setSaleValue(0);
-
-        mv.addObject("itemBean", blankItem);
+        mv.addObject("item", blankItem);
         mv.addObject("uomList", unitOfMeasurementService.listUOM());
+        mv.addObject("vendorList", partnersService.listVendors());
+
+        System.out.println(id);
 
         return mv;
     }

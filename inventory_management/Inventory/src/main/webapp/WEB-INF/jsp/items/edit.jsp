@@ -74,11 +74,35 @@
                                         </div>
                                     </div>
 
-                                </div>                               
+                                </div>
+                                <div class="box-footer">
+                                    <div>
+                                        <button id="save-item" class="pull-right btn btn-success">Save</button>
+                                        <button id="clear-item" class="pull-left btn btn-default">Clear</button>
+                                    </div>
+                                </div>
                             </div>
                         </form:form>
                     </div>                    
-                </div>                                           
+                </div>
+
+                <div class="row" class="item-variants-container">
+                    <div class="col-md-12">  
+                        <div class="box box-info">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Item Variants</h3>
+                            </div>
+                            <div class="box-body">
+                                <!--Main Product Details-->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <jsp:include page="item-variants-table.jsp" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                    
+                    </div>
+                </div>                               
 
                 <div class="row" id="variant-editor-container">
                     <a name="variant"></a>
@@ -87,13 +111,13 @@
                             <div class="box-header with-border">
                                 <h3 class="box-title">Create Variant</h3>
                                 <div class="box-tools pull-right">                                    
-                                    <!--<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>-->
+                                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                 </div>
                             </div>
                             <div class="box-body">
                                 <div class="col-md-8">                                    
-                                    <jsp:include page="item-variant-form.jsp" >                                        
-                                        <jsp:param name="isDefault" value="${true}" />
+                                    <jsp:include page="item-variant-form.jsp" >
+                                        <jsp:param name="type" value="create" />
                                     </jsp:include>
 
                                     TODO: Stock locations
@@ -116,16 +140,16 @@
                                         Variants can be sold or bought, specify the prices.
                                     </p>
                                 </div>
-                            </div>                            
+                            </div>
+                            <div class="box-footer">
+                                <div>
+                                    <button id="save-item-variant" class="pull-right btn btn-success">Save</button>
+                                    <button id="clear-item-variant" class="pull-left btn btn-default">Clear</button>
+                                </div>
+                            </div>
                         </div>                    
                     </div>
                 </div>
-
-                <div class="pull-right">
-                    <button id="save" class="btn btn-success">Save and Create New Variant</button>
-                    <button id="save-and-new" class="btn btn-info">Save and Create New Item</button>
-                </div>
-                <div class="clearfix"></div>
 
             </section>
 

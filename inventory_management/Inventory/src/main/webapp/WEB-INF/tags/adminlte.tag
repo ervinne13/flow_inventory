@@ -1,8 +1,14 @@
 <%@tag description="Admin LTE Page Template Tag" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@attribute name="bodyImports" fragment="true" %>
 <%@attribute name="headImports" fragment="true" %>
 <%@attribute name="pageTitle" required="true" fragment="true" %>
 <%@attribute name="skin" required="true" fragment="true" %>
+
+<c:set var="req" value="${pageContext.request}" />
+<c:set var="url">${req.requestURL}</c:set>
+<c:set var="uri" value="${req.requestURI}" />
 
 <html>
     <head>
@@ -11,6 +17,9 @@
         <title>
             <jsp:invoke fragment="pageTitle"/>
         </title>
+
+        <meta name="base-url" content="${fn:substring(url, 0, fn:length(url) - fn:length(uri))}${req.contextPath}/" />
+
         <jsp:include page="/WEB-INF/jsp/partials/head-imports.jsp"/>
 
         <jsp:invoke fragment="headImports"/>

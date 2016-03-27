@@ -20,3 +20,6 @@
 <script src="<c:url value="/resources/plugins/slimScroll/jquery.slimscroll.min.js"/>"></script>
 <!-- ChartJS 1.0.1 -->
 <script src="<c:url value="/resources/plugins/chartjs/Chart.min.js"/>"></script>
+
+<!--Developer scripts-->
+<script src="<c:url value="/resources/js/globals.js"/>"></script>
